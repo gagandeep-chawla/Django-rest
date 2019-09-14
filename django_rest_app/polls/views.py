@@ -36,7 +36,7 @@ def poll_details(request,pk):
 
 	if request.method == 'PUT':
 		json_parser = JSONParser()
-		data = json_parser	.parse(request)
+		data = json_parser.parse(request)
 		serializer = QuestionSerializer(instance,data = data)
 		if serializer.is_valid():
 			serializer.save()
@@ -64,3 +64,26 @@ def create_practice_model_instance(request):
 			return JsonResponse(serializer.data)
 		else:
 			return JsonResponse(serializer.errors)
+
+@csrf_exempt
+def practice_model_instance_detials(request,pk):
+
+	try:
+		instance = PracticeModel.objects.get(id = pk)
+	except:
+		return JsonResponse({'errors':'PracticeModel is Does not Exist'},status = 400)
+	
+	if request.method =='PUT':
+		json_parser = JSONParser()
+		data = json_parser.parse(request)
+		serializer = PracticeModelSerializer(instance,data = data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data,status = 200)
+		else:
+			return JsonResponse(serializer.errors)
+
+	if request.method == 'DELETE':
+		instance.delete()
+		return JsonResponse({'message':'Message is successfully delete'})
+

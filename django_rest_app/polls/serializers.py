@@ -13,7 +13,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 class PracticeModelSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = PracticeModel
-		exclude = ''
+		exclude = ('id',)
 
 	def create(self,validate_data):
 		question_instances = validate_data.pop('question')

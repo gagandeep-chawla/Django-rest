@@ -7,5 +7,8 @@ urlpatterns = [
 	path('polls/<int:pk>',views.poll_details,name = 'poll_details'),
 	# practice_model request
 	path('practice_model_create/',views.create_practice_model_instance,
-		name = 'create_practice_model_instance')
+		name = 'create_practice_model_instance'),
+	path('practice_model_instance_detials/<int:pk>',
+		views.practice_model_instance_detials,
+		name = 'create_practice_model_instance_detials'),
 ]
